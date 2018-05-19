@@ -10,11 +10,18 @@ It represents something useful stuff that the population should use.
 
 - Name - name of the resource.
 
+### Structure
+
+Constructed stuff.
+
+- Name
+
 ### area
 
 It reperesents the single unit of area. Each area has type.
 - Type - grassland
 - Resources - list of resources, that are availeable on the area
+- Building - it's a kind of structure. It will be used to transform basic resources to better stuff.
 
 ### planet
 
