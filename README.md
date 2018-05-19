@@ -4,10 +4,17 @@ I want to implement a cool planet/solar system/galaxy management application.
 
 ## Structures
 
+### Resource
+
+It represents something useful stuff that the population should use.
+
+- Name - name of the resource.
+
 ### area
 
 It reperesents the single unit of area. Each area has type.
-- type - grassland
+- Type - grassland
+- Resources - list of resources, that are availeable on the area
 
 ### planet
 
