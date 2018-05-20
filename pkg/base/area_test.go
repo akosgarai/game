@@ -47,6 +47,29 @@ func TestAddResource(t *testing.T) {
     }
 }
 
+func TestGetResourceByName(t *testing.T) {
+    area := New()
+    r := resource.New("goo", 100)
+    area.AddResource(r)
+    r = resource.New("goo2", 1000)
+    area.AddResource(r)
+    _, err := area.getResourceByName("goo")
+    if err != nil {
+        t.Error("We should find goo.")
+    }
+    _, err = area.getResourceByName("goo2")
+    if err != nil {
+        t.Error("We should find goo2.")
+    }
+    _, err = area.getResourceByName("goo3")
+    if err == nil {
+        t.Error("We shouldn't find goo3.")
+    }
+    if err.Error() != "Resource missing." {
+        t.Error("Different error message for goo3.")
+    }
+}
+
 func TestBuild(t *testing.T) {
     area := New()
     s := Structure{

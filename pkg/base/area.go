@@ -55,6 +55,15 @@ func (a *Area) Build(s Structure) error {
     return nil
 }
 
+func (a *Area) getResourceByName(name string) (Resource, error) {
+    for index, r := range a.Resources {
+        if r.GetName() == name {
+            return a.Resources[index], nil
+        }
+    }
+    return resource.Empty(), errors.New("Resource missing.")
+}
+
 func (a *Area) Harvest () (Resource, error) {
 
     if a.Building.Name == "" {
