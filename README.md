@@ -30,9 +30,22 @@ Constructed stuff.
 ### area
 
 It reperesents the single unit of area. Each area has type.
+
+```golang
+type Area struct {
+    Type string
+    Resources []Resource
+    Building Structure
+}
+```
+
 - Type - grassland
 - Resources - list of resources, that are availeable on the area
 - Building - it's a kind of structure. It will be used to transform basic resources to better stuff.
+- AddResource(Resource) error - It increases the number of our Resource.Name amount with Resource.Amount or inserts the new Resource to the Resources.
+- Build(Structure) error - It replaces the current area.Building with the given Structure.
+- getResourceByName(string) (Resource, error) - Returns the Resource object if we have Resource.Name resource, or returns error if we haven't.
+- Harvest() error - Modifies the amount of resources, according to the Building.
 
 ### planet
 
