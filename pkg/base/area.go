@@ -21,16 +21,16 @@ func logger(message string) {
     }
 }
 
-type Structure struct {
-    Name string
-    NeededResource Resource
-    ProducedResource Resource
+type Building interface {
+    GetName() string
+    GetNeededResource() resource.Resource
+    GetProducedResource() resource.Resource
 }
 
 type Area struct {
     Type string
-    Resources []Resource
-    Building Structure
+    Resources []resource.Resource
+    Building Building
 }
 
 func New () *Area {
@@ -39,7 +39,7 @@ func New () *Area {
     }
 }
 
-func (a *Area) AddResource(r Resource) error {
+func (a *Area) AddResource(r resource.Resource) error {
     for index, _ := range a.Resources {
         if a.Resources[index].GetName() == r.GetName() {
             a.Resources[index].Produce(r.GetAmount())
@@ -50,40 +50,45 @@ func (a *Area) AddResource(r Resource) error {
     return nil
 }
 
-func (a *Area) Build(s Structure) error {
+func (a *Area) Build(s Building) error {
     a.Building = s
     return nil
 }
 
-func (a *Area) getResourceByName(name string) (Resource, error) {
+func (a *Area) getResourceByName(name string) (resource.Resource, error) {
     for index, r := range a.Resources {
         if r.GetName() == name {
             return a.Resources[index], nil
         }
     }
-    return resource.Empty(), errors.New("Resource missing.")
+    return *resource.Empty(), errors.New("Resource missing.")
 }
 
 func (a *Area) Harvest () error {
+    if a.Building == nil {
+        return nil
+    }
 
-    if a.Building.Name == "" {
+    if a.Building.GetName() == "" {
         return  nil
     }
-    if a.Building.ProducedResource.GetName() == "" {
+    res := a.Building.GetProducedResource()
+    if res.GetName() == "" {
         return  nil
     }
-    if a.Building.NeededResource.GetName() == "" {
-        a.AddResource(a.Building.ProducedResource)
+    res = a.Building.GetNeededResource()
+    if res.GetName() == "" {
+        a.AddResource(a.Building.GetProducedResource())
         return  nil
     }
-    res, err := a.getResourceByName(a.Building.NeededResource.GetName())
+    res, err := a.getResourceByName(res.GetName())
     if err != nil {
         return err
     }
-    if err = res.Harvest(a.Building.NeededResource.GetAmount()); err != nil {
+    if err = res.Harvest(res.GetAmount()); err != nil {
         return err
     }
-    a.AddResource(a.Building.ProducedResource)
+    a.AddResource(a.Building.GetProducedResource())
 
     return nil
 }
