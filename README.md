@@ -21,11 +21,24 @@ type Resource struct {
 - GetName() string - return the name of the resource
 - GetAmount() int - returns the amount of the resource
 
-### Structure
+### pkg/base/structure
 
 Constructed stuff.
 
-- Name
+```golang
+type Structure struct {
+    name string
+    NeededResource *resource.Resource
+    ProducedResource *resource.Resource
+}
+```
+
+- name - name of the structure
+- NeededResource - stuff that needs to be presented to be able to build new stuff.
+- ProducedResource - stuffs that will be produced, if the NeededResources are given.
+- GetName() string - return the name of the structure
+- GetNeededResource() string - return the name of the Needed resource
+- GetProducedResource() string - return the name of the produced resource
 
 ### area
 
