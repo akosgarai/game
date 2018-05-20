@@ -1,23 +1,20 @@
 package structure
 
-type Resource interface {
-    Harvest(int) error
-    Produce(int)
-    GetName() string
-    GetAmount() int
-}
+import(
+    "github.com/akosgarai/game/pkg/base/resource"
+)
 
 type Structure struct {
     name string
-    NeededResource Resource
-    ProducedResource Resource
+    NeededResource resource.Resource
+    ProducedResource resource.Resource
 }
 
 func Empty() *Structure {
     return &Structure{}
 }
 
-func New (name string, needed Resource, produced Resource) *Structure {
+func New (name string, needed resource.Resource, produced resource.Resource) *Structure {
     return &Structure{
         name: name,
         NeededResource: needed,
@@ -27,9 +24,9 @@ func New (name string, needed Resource, produced Resource) *Structure {
 func (s *Structure) GetName() string {
     return s.name
 }
-func (s *Structure) GetNeededResource() Resource {
+func (s *Structure) GetNeededResource() resource.Resource {
     return s.NeededResource
 }
-func (s *Structure) GetProducedResource() Resource {
+func (s *Structure) GetProducedResource() resource.Resource {
     return s.ProducedResource
 }

@@ -21,19 +21,19 @@ func TestGetName(t *testing.T) {
     if s.GetName() != "" {
         t.Errorf("Name suppose to be empty. We have: name: %s", s.name)
     }
-    s = New("TestName", resource.Empty(), resource.Empty())
+    s = New("TestName", *resource.Empty(), *resource.Empty())
     if s.GetName() != "TestName" {
         t.Errorf("Name suppose to be TestName. We have: name: %s", s.name)
     }
 }
 
 func TestGetNeededResource(t *testing.T) {
-    s := New("TestName", resource.Empty(), resource.Empty())
+    s := New("TestName", *resource.Empty(), *resource.Empty())
     res := s.GetNeededResource()
     if res.GetName() != "" {
         t.Errorf("We shouldn't get name. We have %s", res.GetName())
     }
-    s = New("TestName2", resource.New("Iron", 10), resource.New("Car", 1))
+    s = New("TestName2", *resource.New("Iron", 10), *resource.New("Car", 1))
     res = s.GetNeededResource()
     if res.GetName() != "Iron" {
         t.Errorf("It should be Iron. We have %s", res.GetName())
@@ -41,12 +41,12 @@ func TestGetNeededResource(t *testing.T) {
 }
 
 func TestGetProducedResource(t *testing.T) {
-    s := New("TestName", resource.Empty(), resource.Empty())
+    s := New("TestName", *resource.Empty(), *resource.Empty())
     res := s.GetProducedResource()
     if res.GetName() != "" {
         t.Errorf("We shouldn't get name. We have %s", res.GetName())
     }
-    s = New("TestName2", resource.New("Iron", 10), resource.New("Car", 1))
+    s = New("TestName2", *resource.New("Iron", 10), *resource.New("Car", 1))
     res = s.GetProducedResource()
     if res.GetName() != "Car" {
         t.Errorf("It should be Car. We have %s", res.GetName())
