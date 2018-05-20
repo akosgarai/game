@@ -4,6 +4,13 @@ import(
     "testing"
 )
 
+func TestEmpty(t *testing.T) {
+    r := Empty()
+    if r.GetName() != "" {
+        t.Errorf("Name suppose to be empty. We have: name: %s, amount: %d", r.GetName(), r.GetAmount())
+    }
+}
+
 func TestNew(t *testing.T) {
 
     var testData = []struct {

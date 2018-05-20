@@ -10,6 +10,11 @@ type Resource struct {
     Amount int
 }
 
+func Empty() *Resource {
+    return &Resource{}
+}
+
+
 func New(name string, amount int) *Resource {
     return &Resource{
         Name: name,
