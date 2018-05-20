@@ -4,13 +4,22 @@ I want to implement a cool planet/solar system/galaxy management application.
 
 ## Structures
 
-### Resource
+### pkg/base/resource
 
 It represents something useful stuff that the population should use.
 
+```golang
+type Resource struct {
+    Name string
+    Amount int
+}
+```
+
 - Name - name of the resource.
 - Amount - the amount of the resource
-- Harvest(int) - decrease the amount of the resource with the given input.
+- Harvest(int) error - decrease the amount of the resource with the given input.
+- GetName() string - return the name of the resource
+- GetAmount() int - returns the amount of the resource
 
 ### Structure
 
