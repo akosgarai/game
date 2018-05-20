@@ -25,3 +25,11 @@ func (r *Resource) Harvest(amount int) error {
     r.Amount = r.Amount - amount
     return nil
 }
+
+func (r *Resource) GetName() string {
+    return r.Name
+}
+
+func (r *Resource) GetAmount() int {
+    return r.Amount
+}

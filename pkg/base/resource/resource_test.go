@@ -16,10 +16,10 @@ func TestNew(t *testing.T) {
 
     for _, tt := range testData {
         resource := New(tt.Name, tt.Amount)
-        if resource.Name != tt.Name {
+        if resource.GetName() != tt.Name {
             t.Errorf("Name suppose to be same. %s instead of %s", resource.Name, tt.Name)
         }
-        if resource.Amount != tt.Amount {
+        if resource.GetAmount() != tt.Amount {
             t.Errorf("Amount suppose to be same. %d instead of %d", resource.Amount, tt.Amount)
         }
     }
@@ -31,15 +31,15 @@ func TestHarvest(t *testing.T) {
         Amount: 1000,
     }
     r.Harvest(10)
-    if r.Amount != 990 {
+    if r.GetAmount() != 990 {
         t.Error("It suppose to be 990")
     }
     r.Harvest(10)
-    if r.Amount != 980 {
+    if r.GetAmount() != 980 {
         t.Error("It suppose to be 980")
     }
     r.Harvest(10)
-    if r.Amount != 970 {
+    if r.GetAmount() != 970 {
         t.Error("It suppose to be 970")
     }
     err := r.Harvest(1000)
