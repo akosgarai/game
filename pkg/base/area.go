@@ -2,33 +2,22 @@ package area
 
 import (
     "errors"
-    "strconv"
+    "github.com/akosgarai/game/pkg/base/resource"
     "fmt"
 )
 
 var LOG_LEVEL = "ERROR"
 
-type Resource struct {
-    Name string
-    Amount int
+type Resource interface {
+    Harvest(int) error
+    GetName() string
+    GetAmount() int
 }
 
 func logger(message string) {
     if LOG_LEVEL == "DEBUG" {
         fmt.Print(message)
     }
-}
-
-func (r *Resource) Harvest(amount int) error {
-    message := "Harvesting from resource '" + r.Name + "' " + strconv.Itoa(amount) + " / " + strconv.Itoa(r.Amount) + "\n"
-    logger(message)
-    if r.Amount < amount {
-        return errors.New("Insufficient number of resources.")
-    }
-    r.Amount = r.Amount - amount
-    message = "Harvesting from resource '" + r.Name + "' " + strconv.Itoa(amount) + " / " + strconv.Itoa(r.Amount) + "\n"
-    logger(message)
-    return nil
 }
 
 type Structure struct {
@@ -62,23 +51,23 @@ func (a *Area) Build(s Structure) error {
 func (a *Area) Harvest () (Resource, error) {
 
     if a.Building.Name == "" {
-        return Resource{}, nil
+        return resource.Empty(), nil
     }
-    if a.Building.ProducedResource.Name == "" {
-        return Resource{}, nil
+    if a.Building.ProducedResource.GetName() == "" {
+        return resource.Empty(), nil
     }
-    if a.Building.NeededResource.Name == "" {
+    if a.Building.NeededResource.GetName() == "" {
         return a.Building.ProducedResource, nil
     }
     for index, r := range a.Resources {
-        if r.Name == a.Building.NeededResource.Name {
-            if err := r.Harvest(a.Building.NeededResource.Amount); err != nil {
-                return Resource{}, err
+        if r.GetName() == a.Building.NeededResource.GetName() {
+            if err := r.Harvest(a.Building.NeededResource.GetAmount()); err != nil {
+                return resource.Empty(), err
             }
             a.Resources[index] = r
             return a.Building.ProducedResource, nil
         }
     }
 
-    return Resource{}, errors.New("Resource missing.")
+    return resource.Empty(), errors.New("Resource missing.")
 }
