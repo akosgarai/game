@@ -35,6 +35,16 @@ func TestAddResource(t *testing.T) {
     if area.Resources[0].GetAmount() != 1000 {
         t.Error("It suppose to be 1000")
     }
+    area.AddResource(r)
+    if len(area.Resources) != 1 {
+        t.Error("It suppose to be one")
+    }
+    if area.Resources[0].GetName() != "goo" {
+        t.Error("It suppose to be goo")
+    }
+    if area.Resources[0].GetAmount() != 2000 {
+        t.Error("It suppose to be 2000")
+    }
 }
 
 func TestBuild(t *testing.T) {

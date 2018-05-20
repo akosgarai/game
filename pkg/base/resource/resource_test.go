@@ -58,3 +58,21 @@ func TestHarvest(t *testing.T) {
         t.Error("Unexpected error message")
     }
 }
+func TestProduce(t *testing.T) {
+    r := Resource{
+        Name : "goo",
+        Amount: 10,
+    }
+    r.Produce(10)
+    if r.GetAmount() != 20 {
+        t.Error("It suppose to be 20")
+    }
+    r.Produce(10)
+    if r.GetAmount() != 30 {
+        t.Error("It suppose to be 30")
+    }
+    r.Produce(10)
+    if r.GetAmount() != 40 {
+        t.Error("It suppose to be 40")
+    }
+}

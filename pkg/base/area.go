@@ -10,6 +10,7 @@ var LOG_LEVEL = "ERROR"
 
 type Resource interface {
     Harvest(int) error
+    Produce(int)
     GetName() string
     GetAmount() int
 }
@@ -39,6 +40,12 @@ func New () *Area {
 }
 
 func (a *Area) AddResource(r Resource) error {
+    for index, _ := range a.Resources {
+        if a.Resources[index].GetName() == r.GetName() {
+            a.Resources[index].Produce(r.GetAmount())
+            return nil
+        }
+    }
     a.Resources = append(a.Resources, r)
     return nil
 }
