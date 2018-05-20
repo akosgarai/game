@@ -9,6 +9,8 @@ I want to implement a cool planet/solar system/galaxy management application.
 It represents something useful stuff that the population should use.
 
 - Name - name of the resource.
+- Amount - the amount of the resource
+- Harvest(int) - decrease the amount of the resource with the given input.
 
 ### Structure
 
