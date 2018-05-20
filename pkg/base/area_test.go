@@ -89,12 +89,9 @@ func TestBuild(t *testing.T) {
 }
 func TestAreaHarvest(t *testing.T) {
     area := New()
-    resrc, err := area.Harvest()
+    err := area.Harvest()
     if err != nil {
         t.Error("Without building we shouldn't have Error")
-    }
-    if resrc.GetName() != "" {
-        t.Error("Without building we shouldn't have Resource")
     }
     building := Structure{
         Name: "House",
@@ -102,14 +99,18 @@ func TestAreaHarvest(t *testing.T) {
         ProducedResource: resource.New("Stuff", 3),
     }
     area.Build(building)
-    resrc, err = area.Harvest()
+    err = area.Harvest()
     if err != nil {
         t.Error("With this building we shouldn't have Error")
     }
-    if resrc.GetName() != "Stuff" {
+    rsrc, rsrcerr := area.getResourceByName("Stuff")
+    if rsrcerr != nil {
+        t.Error("We should find Stuff without error")
+    }
+    if rsrc.GetName() != "Stuff" {
         t.Error("With this building we should have Stuff")
     }
-    if resrc.GetAmount() != 3 {
+    if rsrc.GetAmount() != 3 {
         t.Error("With this building we should have 3 Stuff")
     }
     building = Structure{
@@ -118,33 +119,41 @@ func TestAreaHarvest(t *testing.T) {
         ProducedResource: resource.New("Car", 1),
     }
     area.Build(building)
-    resrc, err = area.Harvest()
+    err = area.Harvest()
     if err == nil {
         t.Error("With this building we should have Error")
     }
     if err.Error() != "Resource missing." {
         t.Error("With this building we should have different Error")
     }
-    if resrc.GetName() != "" {
-        t.Error("With this building we shouldn't have name")
+    rsrc, rsrcerr = area.getResourceByName("Car")
+    if rsrcerr == nil {
+        t.Error("We shouldn't find Car without error")
     }
     new_resource := resource.New("Iron", 1000)
     area.AddResource(new_resource)
-    resrc, err = area.Harvest()
+    err = area.Harvest()
     if err != nil {
         t.Error("Now, we shouldn't have Error")
     }
-    if resrc.GetName() != "Car" {
+    rsrc, rsrcerr = area.getResourceByName("Car")
+    if rsrcerr != nil {
+        t.Error("We should find Car now")
+    }
+    if rsrc.GetName() != "Car" {
         t.Error("With this building we should have Car")
     }
-    if resrc.GetAmount() != 1 {
+    if rsrc.GetAmount() != 1 {
         t.Error("With this building we should have 1 Car")
     }
-    for _, r := range area.Resources {
-        if r.GetName() == "Iron" {
-            if r.GetAmount() != 990 {
-                t.Errorf("This building should use 10 resource for it's output. Amount: %d", r.GetAmount())
-            }
-        }
+    rsrc, rsrcerr = area.getResourceByName("Iron")
+    if rsrcerr != nil {
+        t.Error("We should find Iron now")
+    }
+    if rsrc.GetName() != "Iron" {
+        t.Error("With this building we should have Iron")
+    }
+    if rsrc.GetAmount() != 990 {
+        t.Error("With this building we should have 990 Iron")
     }
 }

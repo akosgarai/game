@@ -64,26 +64,26 @@ func (a *Area) getResourceByName(name string) (Resource, error) {
     return resource.Empty(), errors.New("Resource missing.")
 }
 
-func (a *Area) Harvest () (Resource, error) {
+func (a *Area) Harvest () error {
 
     if a.Building.Name == "" {
-        return resource.Empty(), nil
+        return  nil
     }
     if a.Building.ProducedResource.GetName() == "" {
-        return resource.Empty(), nil
+        return  nil
     }
     if a.Building.NeededResource.GetName() == "" {
-        return a.Building.ProducedResource, nil
+        a.AddResource(a.Building.ProducedResource)
+        return  nil
     }
-    for index, r := range a.Resources {
-        if r.GetName() == a.Building.NeededResource.GetName() {
-            if err := r.Harvest(a.Building.NeededResource.GetAmount()); err != nil {
-                return resource.Empty(), err
-            }
-            a.Resources[index] = r
-            return a.Building.ProducedResource, nil
-        }
+    res, err := a.getResourceByName(a.Building.NeededResource.GetName())
+    if err != nil {
+        return err
     }
+    if err = res.Harvest(a.Building.NeededResource.GetAmount()); err != nil {
+        return err
+    }
+    a.AddResource(a.Building.ProducedResource)
 
-    return resource.Empty(), errors.New("Resource missing.")
+    return nil
 }
