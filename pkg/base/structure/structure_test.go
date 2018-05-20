@@ -1,0 +1,9 @@
+package structure
+
+import(
+    "testing"
+)
+
+func TestDummy(t *testing.T) {
+    t.Skip("Dummy")
+}
