@@ -1,20 +1,20 @@
 package structure
 
 import(
-    "github.com/akosgarai/game/pkg/base/resource"
+    "github.com/akosgarai/game/pkg/base/interfaces"
 )
 
 type Structure struct {
     name string
-    NeededResource *resource.Resource
-    ProducedResource *resource.Resource
+    NeededResource interfaces.Resource
+    ProducedResource interfaces.Resource
 }
 
 func Empty() *Structure {
     return &Structure{}
 }
 
-func New (name string, needed *resource.Resource, produced *resource.Resource) *Structure {
+func New (name string, needed interfaces.Resource, produced interfaces.Resource) *Structure {
     return &Structure{
         name: name,
         NeededResource: needed,
@@ -24,9 +24,9 @@ func New (name string, needed *resource.Resource, produced *resource.Resource) *
 func (s *Structure) GetName() string {
     return s.name
 }
-func (s *Structure) GetNeededResource() *resource.Resource {
+func (s *Structure) GetNeededResource() interfaces.Resource {
     return s.NeededResource
 }
-func (s *Structure) GetProducedResource() *resource.Resource {
+func (s *Structure) GetProducedResource() interfaces.Resource {
     return s.ProducedResource
 }
