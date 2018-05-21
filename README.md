@@ -18,6 +18,7 @@ type Resource struct {
 - Name - name of the resource.
 - Amount - the amount of the resource
 - Harvest(int) error - decrease the amount of the resource with the given input.
+- Produce(int) - increase the amount of the resource with the given input.
 - GetName() string - return the name of the resource
 - GetAmount() int - returns the amount of the resource
 
@@ -37,8 +38,8 @@ type Structure struct {
 - NeededResource - stuff that needs to be presented to be able to build new stuff.
 - ProducedResource - stuffs that will be produced, if the NeededResources are given.
 - GetName() string - return the name of the structure
-- GetNeededResource() string - return the name of the Needed resource
-- GetProducedResource() string - return the name of the produced resource
+- GetNeededResource() interfaces.Resource - return the Needed resource
+- GetProducedResource() interfaces.Resource - return the produced resource
 
 ### pkg/base/area
 
@@ -55,9 +56,9 @@ type Area struct {
 - Type - grassland
 - Resources - list of resources, that are availeable on the area
 - Building - it's a kind of structure. It will be used to transform basic resources to better stuff.
-- AddResource(\*resource.Resource) error - It increases the number of our Resource.Name amount with Resource.Amount or inserts the new Resource to the Resources.
+- AddResource(interfaces.Resource) error - It increases the number of our Resource.Name amount with Resource.Amount or inserts the new Resource to the Resources.
 - Build(Building) error - It replaces the current area.Building with the given Structure.
-- getResourceByName(string) (resource.Resource, error) - Returns the Resource object if we have Resource.Name resource, or returns error if we haven't.
+- getResourceIndexByName(string) (int, error) - Returns the index of Resource object (in resources) if we have Resource.Name resource, or returns error if we haven't.
 - Harvest() error - Modifies the amount of resources, according to the Building.
 
 ### planet
