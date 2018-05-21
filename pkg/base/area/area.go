@@ -14,16 +14,10 @@ func logger(message string) {
 	}
 }
 
-type Building interface {
-	GetName() string
-	GetNeededResource() interfaces.Resource
-	GetProducedResource() interfaces.Resource
-}
-
 type Area struct {
 	Type      string
 	Resources []interfaces.Resource
-	Building  Building
+	Building  interfaces.Building
 }
 
 func New() *Area {
@@ -43,7 +37,7 @@ func (a *Area) AddResource(r interfaces.Resource) error {
 	return nil
 }
 
-func (a *Area) Build(s Building) error {
+func (a *Area) Build(s interfaces.Building) error {
 	a.Building = s
 	return nil
 }

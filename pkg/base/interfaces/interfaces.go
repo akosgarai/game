@@ -6,3 +6,9 @@ type Resource interface {
 	GetName() string
 	GetAmount() int
 }
+
+type Building interface {
+	GetName() string
+	GetNeededResource() Resource
+	GetProducedResource() Resource
+}
