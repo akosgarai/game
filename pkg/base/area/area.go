@@ -42,7 +42,7 @@ func (a *Area) Build(s interfaces.Building) error {
 	return nil
 }
 
-func (a *Area) getResourceIndexByName(name string) (int, error) {
+func (a *Area) GetResourceIndexByName(name string) (int, error) {
 	for index, r := range a.Resources {
 		if r.GetName() == name {
 			return index, nil
@@ -68,7 +68,7 @@ func (a *Area) Harvest() error {
 		a.AddResource(a.Building.GetProducedResource())
 		return nil
 	}
-	res_i, err := a.getResourceIndexByName(res_needed.GetName())
+	res_i, err := a.GetResourceIndexByName(res_needed.GetName())
 	if err != nil {
 		return err
 	}

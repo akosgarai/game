@@ -12,3 +12,11 @@ type Building interface {
 	GetNeededResource() Resource
 	GetProducedResource() Resource
 }
+
+type Action interface {
+	IsKnown() bool
+	GetName() string
+	GetConsumption() bool
+	GetNeededResources() Resource
+	GetProducedResources() Resource
+}
