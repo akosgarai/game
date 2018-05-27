@@ -6,10 +6,6 @@ import (
 	"testing"
 )
 
-func TestEmpty(t *testing.T) {
-	t.Skip("Empty")
-}
-
 func TestNew(t *testing.T) {
 	p := New("TestName", 3)
 	if p.Name != "TestName" {
@@ -58,5 +54,20 @@ func TestAddAction(t *testing.T) {
 	p.addAction(action.Gathering())
 	if len(p.Actions) != 1 {
 		t.Error("Acton's length suppose to be the same")
+	}
+}
+func TestGetAction(t *testing.T) {
+	p := New("TestName", 3)
+	guys := speacies.New("test race", 1)
+	err := p.Populate(guys)
+	if err != nil {
+		t.Error("Population suppose to be successful first")
+	}
+	action, err := p.getActionIndex("Gathering")
+	if err != nil {
+		t.Error("Gathering suppose to be known")
+	}
+	if p.Actions[action].GetName() != "Gathering" {
+		t.Error("Gathering suppose to be named as Gathering")
 	}
 }

@@ -20,7 +20,7 @@ type Action struct {
 }
 
 // IsKnown - returns true, if the action is known.
-func (a *Action) IsNkown() bool {
+func (a *Action) IsKnown() bool {
 	return a.isKnown
 }
 

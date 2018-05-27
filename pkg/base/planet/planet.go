@@ -47,7 +47,8 @@ func (p *Planet) Populate(r interfaces.Resource) error {
 // addAction insert new action to the list
 // it has some basic validation.
 func (p *Planet) addAction(a interfaces.Action) {
-	if !p.isActionInvented(a.GetName()) {
+	name := a.GetName()
+	if name == "" || !p.isActionInvented(name) {
 		p.Actions = append(p.Actions, a)
 	}
 }
@@ -60,4 +61,16 @@ func (p *Planet) isActionInvented(name string) bool {
 		}
 	}
 	return false
+}
+
+func (p *Planet) getActionIndex(name string) (int, error) {
+	if !p.isActionInvented(name) {
+		return -1, errors.New("Action isn't invented")
+	}
+	for i, v := range p.Actions {
+		if v.GetName() == name && v.IsKnown() {
+			return i, nil
+		}
+	}
+	return -1, errors.New("Action isn't invented")
 }

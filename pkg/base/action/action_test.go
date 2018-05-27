@@ -16,7 +16,7 @@ func TestAction(t *testing.T) {
 	if action.GetName() != "testAction" {
 		t.Error("Invalid action name")
 	}
-	if action.IsNkown() != false {
+	if action.IsKnown() != false {
 		t.Error("Action suppose to be unknown")
 	}
 	if action.GetNeededResources().GetName() != "" {
@@ -36,7 +36,7 @@ func TestGathering(t *testing.T) {
 	if action.GetName() != "Gathering" {
 		t.Error("Invalid action name - Gathering")
 	}
-	if action.IsNkown() != true {
+	if action.IsKnown() != true {
 		t.Error("Action suppose to be known")
 	}
 	if action.GetNeededResources().GetName() != "population" {
