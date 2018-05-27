@@ -79,9 +79,19 @@ type Area struct {
 - getResourceIndexByName(string) (int, error) - Returns the index of Resource object (in resources) if we have Resource.Name resource, or returns error if we haven't.
 - Harvest() error - Modifies the amount of resources, according to the Building.
 
-### planet
+### pkg/base/planet
 
 it contains X amount of areas depending on the planet size
+
+```golang
+type Planet struct {
+    Name string
+    Area []area.Area
+}
+```
+
+- Name - Name of the planet
+- Area - Size of the planet - 1 area / size.
 
 ### population
 

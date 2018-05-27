@@ -2,8 +2,8 @@ package area
 
 import (
 	"github.com/akosgarai/game/pkg/base/resource"
-	"github.com/akosgarai/game/pkg/base/structure"
 	"testing"
+	"github.com/akosgarai/game/pkg/base/structure"
 )
 
 func TestNew(t *testing.T) {
