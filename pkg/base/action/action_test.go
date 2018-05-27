@@ -11,6 +11,7 @@ func TestAction(t *testing.T) {
 		isKnown:           false,
 		producedResources: resource.New("goo", 10),
 		neededResources:   resource.Empty(),
+		consumption:       false,
 	}
 
 	if action.GetName() != "testAction" {
@@ -18,6 +19,9 @@ func TestAction(t *testing.T) {
 	}
 	if action.IsKnown() != false {
 		t.Error("Action suppose to be unknown")
+	}
+	if action.GetConsumption() != false {
+		t.Error("Invalid consumption")
 	}
 	if action.GetNeededResources().GetName() != "" {
 		t.Error("Suppose to be empty")
@@ -44,6 +48,9 @@ func TestGathering(t *testing.T) {
 	}
 	if action.GetNeededResources().GetAmount() != 1 {
 		t.Error("Suppose to be 1")
+	}
+	if action.GetConsumption() != false {
+		t.Error("Invalid consumption")
 	}
 	r := action.GetProducedResources()
 	if r.GetName() != "berries" {

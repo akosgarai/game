@@ -17,11 +17,17 @@ type Action struct {
 	neededResources   interfaces.Resource
 	producedResources interfaces.Resource
 	isKnown           bool
+	consumption       bool
 }
 
 // IsKnown - returns true, if the action is known.
 func (a *Action) IsKnown() bool {
 	return a.isKnown
+}
+
+// GetConsumption - returns true, if the consumption is true.
+func (a *Action) GetConsumption() bool {
+	return a.consumption
 }
 
 // GetName returns the action's name
@@ -46,5 +52,6 @@ func Gathering() *Action {
 		isKnown:           true,
 		producedResources: resource.New("berries", 10),
 		neededResources:   resource.New("population", 1),
+		consumption:       false,
 	}
 }
