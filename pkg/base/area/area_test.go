@@ -2,8 +2,8 @@ package area
 
 import (
 	"github.com/akosgarai/game/pkg/base/resource"
-	"testing"
 	"github.com/akosgarai/game/pkg/base/structure"
+	"testing"
 )
 
 func TestNew(t *testing.T) {
@@ -54,21 +54,21 @@ func TestGetResourceIndexByName(t *testing.T) {
 	area.AddResource(r)
 	r = resource.New("goo2", 1000)
 	area.AddResource(r)
-	index, err := area.getResourceIndexByName("goo")
+	index, err := area.GetResourceIndexByName("goo")
 	if err != nil {
 		t.Error("We should find goo.")
 	}
 	if area.Resources[index].GetName() != "goo" {
 		t.Error("We should find goo. We found something else.")
 	}
-	index, err = area.getResourceIndexByName("goo2")
+	index, err = area.GetResourceIndexByName("goo2")
 	if err != nil {
 		t.Error("We should find goo2.")
 	}
 	if area.Resources[index].GetName() != "goo2" {
 		t.Error("We should find goo. We found something else.")
 	}
-	_, err = area.getResourceIndexByName("goo3")
+	_, err = area.GetResourceIndexByName("goo3")
 	if err == nil {
 		t.Error("We shouldn't find goo3.")
 	}
@@ -102,7 +102,7 @@ func TestAreaHarvest(t *testing.T) {
 	if err != nil {
 		t.Error("With this building we shouldn't have Error")
 	}
-	rsrc_i, rsrcerr := area.getResourceIndexByName("Stuff")
+	rsrc_i, rsrcerr := area.GetResourceIndexByName("Stuff")
 	rsrc := area.Resources[rsrc_i]
 	if rsrcerr != nil {
 		t.Error("We should find Stuff without error")
@@ -122,7 +122,7 @@ func TestAreaHarvest(t *testing.T) {
 	if err.Error() != "Resource missing." {
 		t.Error("With this building we should have different Error")
 	}
-	rsrc_i, rsrcerr = area.getResourceIndexByName("Car")
+	rsrc_i, rsrcerr = area.GetResourceIndexByName("Car")
 	if rsrcerr == nil {
 		t.Error("We shouldn't find Car without error")
 	}
@@ -132,7 +132,7 @@ func TestAreaHarvest(t *testing.T) {
 	if err != nil {
 		t.Error("Now, we shouldn't have Error")
 	}
-	rsrc_i, rsrcerr = area.getResourceIndexByName("Car")
+	rsrc_i, rsrcerr = area.GetResourceIndexByName("Car")
 	rsrc = area.Resources[rsrc_i]
 	if rsrcerr != nil {
 		t.Error("We should find Car now")
@@ -143,7 +143,7 @@ func TestAreaHarvest(t *testing.T) {
 	if rsrc.GetAmount() != 1 {
 		t.Error("With this building we should have 1 Car")
 	}
-	rsrc_i, rsrcerr = area.getResourceIndexByName("Iron")
+	rsrc_i, rsrcerr = area.GetResourceIndexByName("Iron")
 	rsrc = area.Resources[rsrc_i]
 	if rsrcerr != nil {
 		t.Error("We should find Iron now")
