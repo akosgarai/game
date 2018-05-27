@@ -10,7 +10,7 @@ func TestEmpty(t *testing.T) {
 
 func TestNew(t *testing.T) {
     p := New("TestName", 3)
-    if p.Name != "TestNew" {
+    if p.Name != "TestName" {
         t.Error("Invalid name for plaet")
     }
     if len(p.Area) != 3 {
