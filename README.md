@@ -22,6 +22,24 @@ type Resource struct {
 - GetName() string - return the name of the resource
 - GetAmount() int - returns the amount of the resource
 
+### pkg/base/speacies
+
+Resource implementation for representing the population.
+
+```golang
+type Speacies struct {
+    Name string
+    population int
+}
+```
+
+- Name - name of the speacies
+- population - the number of the population
+- Harvest(int) error - decrease the number of the population with the given input.
+- Produce(int) - increase the number of the population with the given input.
+- GetName() string - return the name of the speacies
+- GetAmount() int - returns the number of the population
+
 ### pkg/base/structure
 
 Constructed stuff.
