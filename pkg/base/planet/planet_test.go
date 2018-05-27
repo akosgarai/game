@@ -30,4 +30,7 @@ func TestPopulate(t *testing.T) {
 	if err == nil {
 		t.Error("Population suppose to be errored next time")
 	}
+        if err.Error() != "Planet populated." {
+		t.Error("Different error message")
+        }
 }
