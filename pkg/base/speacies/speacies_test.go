@@ -7,7 +7,7 @@ import (
 func TestNew(t *testing.T) {
 
 	var testData = []struct {
-		Name   string
+		Name       string
 		population int
 	}{
 		{"test1", 10},
@@ -27,7 +27,7 @@ func TestNew(t *testing.T) {
 
 func TestHarvest(t *testing.T) {
 	r := Speacies{
-		Name:   "goo",
+		Name:       "goo",
 		population: 1000,
 	}
 	r.Harvest(10)
@@ -45,7 +45,7 @@ func TestHarvest(t *testing.T) {
 }
 func TestProduce(t *testing.T) {
 	r := Speacies{
-		Name:   "goo",
+		Name:       "goo",
 		population: 10,
 	}
 	r.Produce(10)
