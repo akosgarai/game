@@ -16,6 +16,7 @@ type Building interface {
 type Action interface {
 	IsKnown() bool
 	GetName() string
+	GetConsumption() bool
 	GetNeededResources() Resource
 	GetProducedResources() Resource
 }
