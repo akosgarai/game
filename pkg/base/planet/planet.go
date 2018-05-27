@@ -3,6 +3,7 @@ package planet
 
 import (
 	"errors"
+	"github.com/akosgarai/game/pkg/base/action"
 	"github.com/akosgarai/game/pkg/base/area"
 	"github.com/akosgarai/game/pkg/base/interfaces"
 )
@@ -17,6 +18,7 @@ type Planet struct {
 	Area        []area.Area
 	Population  interfaces.Resource
 	isPopulated bool
+	Actions     []interfaces.Action
 }
 
 // New returns *Planet with the given name and size.
@@ -37,6 +39,11 @@ func (p *Planet) Populate(r interfaces.Resource) error {
 		return errors.New("Planet populated.")
 	}
 	p.Population = r
+	p.addAction(action.Gathering())
 	p.isPopulated = true
 	return nil
+}
+
+func (p *Planet) addAction(a interfaces.Action) {
+	p.Actions = append(p.Actions, a)
 }

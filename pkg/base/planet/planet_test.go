@@ -30,7 +30,13 @@ func TestPopulate(t *testing.T) {
 	if err == nil {
 		t.Error("Population suppose to be errored next time")
 	}
-        if err.Error() != "Planet populated." {
+	if err.Error() != "Planet populated." {
 		t.Error("Different error message")
-        }
+	}
+	if len(p.Actions) != 1 {
+		t.Error("Should have action after population")
+	}
+	if p.Actions[0].GetName() != "Gathering" {
+		t.Error("Should have gathering action after population")
+	}
 }
